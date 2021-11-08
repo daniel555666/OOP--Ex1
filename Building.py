@@ -10,6 +10,7 @@ class Building:
           print("hello")
     def __init__(self, file_name):
           self.from_json(self, file_name)
+          
     def from_json(self,file_name):
         with open(file_name,"r") as fp:
             di=json.load(fp)
