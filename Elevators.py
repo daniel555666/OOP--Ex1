@@ -1,11 +1,11 @@
 class Elevators:
-    def __init__(self):
-        self._id = 0
-        self._speed = 5
-        self._minFloor = -5
-        self._maxFloor = 10
-        self._closeTime = 3
-        self._openTime = 3
-        self._startTime = 4
-        self._stopTime = 4
+    def __init__(self, di):
+        self._id = di["_id"]
+        self._speed = di["_speed"]
+        self._minFloor = di["_minFloor"]
+        self._maxFloor = di["_maxFloor"]
+        self._closeTime = di["_closeTime"]
+        self._openTime = di["_openTime"]
+        self._startTime = di["_startTime"]
+        self._stopTime = di["_stopTime"]
         self._currentFloor = 0
