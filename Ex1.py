@@ -29,9 +29,9 @@ def chooseElevator():
 
 
 if __name__ == "__main__":
-    building = Building("input\Ex1_input\Ex1_Buildings\B5.json")
+    building = Building("input\Ex1_input\Ex1_Buildings\B1.json")
     calls = readCalls("input\Ex1_input\Ex1_Calls\Calls_d.csv")
     chooseElevator()
     writeCalls()
-    print(building._elevators[1].__dict__)
+    print(building._elevators[0].__dict__)
     print(calls[0].__dict__)

@@ -9,3 +9,4 @@ class Elevators:
         self._startTime = di["_startTime"]
         self._stopTime = di["_stopTime"]
         self._currentFloor = 0
+        self.endTime=0
