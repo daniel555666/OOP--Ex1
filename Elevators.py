@@ -10,7 +10,7 @@ class Elevators:
         self._startTime = di["_startTime"]
         self._stopTime = di["_stopTime"]
         self._currentFloor = 0
-        self._endTime={CallForElevator(0,0,0,0):0}
+        self._endTime={CallForElevator([0,0,0,0,0,0]):0}
         
     def timeForCall(self, call):
         range = abs(self._currentFloor - call.src) + abs(call.src - call.dest)
@@ -22,6 +22,5 @@ class Elevators:
     def isState(self, time):
         if self._endTime.__len__==0 :
             return True
-        print(self._endTime.values().__dict__)
-        return (time >= max(self._endTime.values()))
+        return (float(time) >= max(self._endTime.values()))
         
