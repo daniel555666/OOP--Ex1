@@ -31,6 +31,11 @@ def allRestElevators(time):
             list.append(e)
     return list
 
+def timeToSrc(elev, call):
+    if(elev._currentFloor == call.src):
+        return 0
+    length = abs(elev._currentFloor-call.src)
+    return length/elev._speed + elev._startTime+elev._stopTime
 
 def chooseElevator():
     for c in calls:
@@ -44,16 +49,8 @@ def chooseElevator():
                 fastestE = e
                 fastestTime = temp
         c.elevator = fastestE._id
-        fastestE.endTime.update({c: fastestE.timeForCall(c)})
-
-
-def timeToSrc(elev, call):
-    if(elev._currentFloor == call.src):
-        return 0
-    length = abs(elev._currentFloor-call.src)
-    return length/elev._speed + elev._startTime+elev._stopTime
-
-
+        fastestE._endTime.update({c: fastestE.timeForCall(c)})
+        
 if __name__ == "__main__":
     building = Building("input\Ex1_input\Ex1_Buildings\B1.json")
     calls = readCalls("input\Ex1_input\Ex1_Calls\Calls_d.csv")
