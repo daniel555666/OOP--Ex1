@@ -1,3 +1,4 @@
+import sys
 from CallForElevator import CallForElevator
 from Building import Building
 from Elevators import Elevators
@@ -9,7 +10,7 @@ def readCalls(file_name):
     calls = []
     with open(file_name) as fp:
         data = csv.reader(fp)
-        print(data)
+        #print(data)
         for k in data:
             if (int(k[2]) >= building._minFloor and int(k[2]) <= building._maxFloor) and (int(k[3]) >= building._minFloor and int(k[3]) <= building._maxFloor):
                 calls.append(CallForElevator(k))
@@ -56,12 +57,16 @@ def runTester():
     subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 1111,2222,3333 "+ buildingName +"  "+ outputName +"  out.log"])
     
 if __name__ == "__main__":
-    buildingName = "input\Ex1_input\Ex1_Buildings\B5.json"
-    callsName = "input\Ex1_input\Ex1_Calls\Calls_a.csv"
-    outputName = "output.csv"
+    myinput = sys.argv
+    buildingName = myinput[1]
+    callsName = myinput[2]
+    outputName = myinput[3]
+    
     building = Building(buildingName)
     calls = readCalls(callsName)
+    
     chooseElevator()
+    
     writeCalls()
     # print(building._elevators[0].__dict__)
     # print(calls[0].__dict__)
