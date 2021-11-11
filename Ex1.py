@@ -6,6 +6,21 @@ import csv
 import random
 import subprocess
 
+def inputs():
+    if len(sys.argv) == 1:
+        di = {
+        "buildingName": "input\Ex1_input\Ex1_Buildings\B1.json",
+        "callsName": "input\Ex1_input\Ex1_Calls\Calls_a.csv",
+        "outputName": "out.csv"
+        }
+    else:
+        di = {
+        "buildingName": sys.argv[1],
+        "callsName": sys.argv[2],
+        "outputName": sys.argv[3]
+        }
+    return di
+
 def readCalls(file_name):
     calls = []
     with open(file_name) as fp:
@@ -21,7 +36,7 @@ def writeCalls():
     dataCalls = []
     for k in calls:
         dataCalls.append(k.__dict__.values())
-    with open(outputName, 'w', newline="") as fu:
+    with open(myinput["outputName"], 'w', newline="") as fu:
         csvwriter = csv.writer(fu)
         csvwriter.writerows(dataCalls)
 
@@ -54,20 +69,12 @@ def chooseElevator():
         # fastestE._endTime.update({c: fastestE.timeForCall(c)})
         c.elevator = random.randint(0, len(building._elevators)-1)
 def runTester():
-    subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 1111,2222,3333 "+ buildingName +"  "+ outputName +"  out.log"])
-    
+    subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 1111,2222,3333 "+ myinput["buildingName"] +"  "+ myinput["outputName"] +"  out.log"])
+
 if __name__ == "__main__":
-    myinput = sys.argv
-    buildingName = myinput[1]
-    callsName = myinput[2]
-    outputName = myinput[3]
-    
-    building = Building(buildingName)
-    calls = readCalls(callsName)
-    
+    myinput = inputs()
+    building = Building(myinput["buildingName"])
+    calls = readCalls(myinput["callsName"])
     chooseElevator()
-    
     writeCalls()
-    # print(building._elevators[0].__dict__)
-    # print(calls[0].__dict__)
     runTester()
