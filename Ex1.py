@@ -66,7 +66,7 @@ def chooseElevator():
             for c2 in calls:
                 if elev.endTime + timeToSrc(elev, c2) < c2.time and c.src < c2.src and c.dest > c2.dest:
                     c2.elevator = elev.index
-                    elev.endTime += elev.startTime + elev.stopTime + elev.openTime + elev.closeTime  # startstopopenclose
+                    elev.endTime += elev.extraTime()  # startstopopenclose
 
         elev.addCall(c)
 

@@ -26,4 +26,6 @@ class Elevators:
     def addCall(self, c):
         self.endTime = self.endTime + self.timeForCall(c)
         self.finalFloor = c.dest
+    def extraTime(self)->float:
+        return self.startTime + self.stopTime + self.openTime + self.closeTime
         
