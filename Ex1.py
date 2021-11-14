@@ -9,8 +9,8 @@ import subprocess
 def inputs():
     if len(sys.argv) == 1:
         di = {
-        "buildingName": "input\Ex1_input\Ex1_Buildings\B1.json",
-        "callsName": "input\Ex1_input\Ex1_Calls\Calls_a.csv",
+        "buildingName": "input\Ex1_Buildings\B1.json",
+        "callsName": "input\Ex1_Calls\Calls_a.csv",
         "outputName": "out.csv"
         }
     else:
@@ -27,7 +27,7 @@ def readCalls(file_name):
         data = csv.reader(fp)
         #print(data)
         for k in data:
-            if (int(k[2]) >= building._minFloor and int(k[2]) <= building._maxFloor) and (int(k[3]) >= building._minFloor and int(k[3]) <= building._maxFloor):
+            if (int(k[2]) >= building.minFloor and int(k[2]) <= building.maxFloor) and (int(k[3]) >= building.minFloor and int(k[3]) <= building.maxFloor):
                 calls.append(CallForElevator(k))
     return calls
 
@@ -41,35 +41,59 @@ def writeCalls():
         csvwriter.writerows(dataCalls)
 
 
-def allRestElevators(time):
+def allRestElevators(time) -> list:
     list = []
-    for e in building._elevators:
+    for e in building.elevators:
         if e.isState(time):
             list.append(e)
     return list
 
 def timeToSrc(elev, call):
-    if(elev._currentFloor == call.src):
+    if(elev.finalFloor == call.src):
         return 0
-    length = abs(elev._currentFloor-call.src)
-    return length/elev._speed + elev._startTime+elev._stopTime
+    length = abs(elev.finalFloor -call.src)
+    return length/elev.speed + elev.startTime+elev.stopTime
 
 def chooseElevator():
     for c in calls:
-        # restElevators = allRestElevators(c.time)
-        # # we need to check if restElevators not Empty
-        # fastestE = restElevators[0]
-        # fastestTime = timeToSrc(restElevators[0], c)
-        # for e in restElevators:
-        #     temp = timeToSrc(e, c)
-        #     if temp < fastestTime:
-        #         fastestE = e
-        #         fastestTime = temp
-        # c.elevator = fastestE._id
-        # fastestE._endTime.update({c: fastestE.timeForCall(c)})
-        c.elevator = random.randint(0, len(building._elevators)-1)
+        if c.isDone==False:
+            elev = allocate(c)
+            c.elevator = elev.id
+            c.isDone=True
+            for c2 in calls:
+                if elevTime + timeToSrc(elev,c2)<c2.time and c.src < c2.src and c.dest > c2.dest:
+                    c2.elevator = elev.id
+                    c2.isDone=True
+                    elev.endTime+=#startstopopenclose
+            
+        elev.addCall(c)    
+def allocate(c):
+    ans = building.elevators[0]
+    rests = allRestElevators(c.time)
+    if len(rests) != 0:
+        minE = rests[0]
+        minTime = timeToSrc(minE, c)
+        for e in rests:
+           tempTime=timeToSrc(e,c)
+           if(tempTime<minTime):
+                minE=e
+                minTime=tempTime
+        ans = minE
+    else:
+        minE = building.elevators[0]
+        minR = timeToSrc(minE, c)
+        for e in building.elevators:
+            tempTime=timeToSrc(e,c)
+            if(tempTime<minR):
+                minE=e
+                minR=tempTime
+        ans = minE
+    return ans
+
+           
+             
 def runTester():
-    subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 1111,2222,3333 "+ myinput["buildingName"] +"  "+ myinput["outputName"] +"  out.log"])
+    subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 1111,2222,3333 "+ myinput["buildingName"] +"  "+ myinput["outputName"] +"  outputFormTEster.log"])
 
 if __name__ == "__main__":
     myinput = inputs()
