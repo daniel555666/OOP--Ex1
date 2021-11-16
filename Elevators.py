@@ -1,4 +1,7 @@
 from CallForElevator import CallForElevator
+from queue import PriorityQueue
+
+
 class Elevators:
     def __init__(self, di, index):
         self.id = int(di["_id"])
@@ -9,23 +12,28 @@ class Elevators:
         self.openTime = float(di["_openTime"])
         self.startTime = float(di["_startTime"])
         self.stopTime = float(di["_stopTime"])
-        self.finalFloor = 0
-        self.endTime= float(0)
         self.index = index
-        
-    def timeForCall(self, call) -> float:
-        range = abs(self.finalFloor - call.src) + abs(call.src - call.dest)
-        timeExtra=2*self.stopTime+self.startTime + 2*self.openTime + 2*self.closeTime
-        if self.finalFloor != call.src:
-            timeExtra += self.startTime
-        return range/self.speed +timeExtra
-    def isState(self, time) -> bool:
-        if self.endTime==0 :
-            return True
-        return (float(time) >= self.endTime)
-    def addCall(self, c):
-        self.endTime = self.endTime + self.timeForCall(c)
-        self.finalFloor = c.dest
-    def extraTime(self)->float:
-        return self.startTime + self.stopTime + self.openTime + self.closeTime
-        
+
+        self.currentFloor = 0
+        self.startTime = 0
+        self.state = 0  # 1 Up, -1 DOWN, 0 LEVEL
+
+        self.destList = PriorityQueue()
+        self.destList.put(0)  # [floor]
+        self.dest = self.destList.get()
+
+        self.stoptime = self.startTime + self.stopTime + self.openTime + self.closeTime
+
+    def updetDest(self):
+        if not self.destList.empty():
+            if self.state == -1:
+                self.dest = -1 * self.destList.get()
+            else:
+                self.dest = self.destList.get()
+        else:
+            self.state = 0
+        return self.dest
+
+    def sortDestList(self):
+        for i in self.destList.queue:
+            i *= self.state
