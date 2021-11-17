@@ -2,6 +2,7 @@
 ## Elevator system design algorithm
 by Dvir Gev and Daniel Zaken
 OOP Ex1 exercise ariel university. In this task we are required to execute an algorithm, to find the best time for the total calls in offline mode.
+In this algorithm we use an idea from the last task that was of the online algorithm, by that we implemented cmd and simulates the time and reception of the calls to know which elevator to assign to which call.
 
 ## Functions at the algorithm
 **candidateElevators** - Return the best elevator fot the call.<br />
