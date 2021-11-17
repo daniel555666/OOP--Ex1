@@ -21,3 +21,4 @@ link to instructions of Ex1 https://docs.google.com/document/d/1D4aW2vRaKjwtSBY1
 
 
 ![image](https://user-images.githubusercontent.com/92304153/142245777-f47dff89-a507-4ba9-b2a1-7244c50688b5.png)
+![image](https://user-images.githubusercontent.com/92304153/142252763-06b9ab67-5c0c-4adf-9bc9-0881ac8a37ff.png)
