@@ -4,16 +4,16 @@ by Dvir Gev and Daniel Zaken
 OOP Ex1 exercise ariel university. In this task we are required to execute an algorithm, to find the best time for the total calls in offline mode.
 
 ## Functions at the algorithm
-candidateElevators - Return the best elevator fot the call.<br />
-calculateTime - The function get two floor numbers and will calculate how much time take the elevator to go from one to the other.<br /> 
-allocateAnElevator - The function get call and allocate the best elevator for her.<br />
-cmd - Get the current time and move all the elevators.<br />
-algorithm - Simulates the time of the scenario and calls the functions cmd and allocateAnElevator.<br />
-runTester - activate the tester.<br />
+**candidateElevators** - Return the best elevator fot the call.<br />
+**calculateTime** - The function get two floor numbers and will calculate how much time take the elevator to go from one to the other.<br /> 
+**allocateAnElevator** - The function get call and allocate the best elevator for her.<br />
+**cmd** - Get the current time and move all the elevators.<br />
+**algorithm** - Simulates the time of the scenario and calls the functions cmd and allocateAnElevator.<br />
+**runTester** - activate the tester.<br />
 ## Class
-class Elevatorsv.
-class Building.
-class CallForElevator.
+class Elevatorsv<br />
+class Building<br />
+class CallForElevator<br />
 
 
 link to instructions of Ex1 https://docs.google.com/document/d/1D4aW2vRaKjwtSBY1gDyCC6SNRE5TRGwMerGIXUMkI_Y/edit
