@@ -3,7 +3,7 @@
 by Dvir Gev and Daniel Zaken
 OOP Ex1 exercise ariel university. In this task we are required to execute an algorithm, to find the best time for the total calls in offline mode.
 
-#Functions at the algorithm
+# Functions at the algorithm
 candidateElevators - Return the best elevator fot the call;
 calculateTime - The function get two floor numbers and will calculate how much time take the elevator to go from one to the other.  
 allocateAnElevator - The function get call and allocate the best elevator for her.
