@@ -1,5 +1,5 @@
-## OOP--Ex1
-# Elevator system design algorithm
+# OOP--Ex1
+## Elevator system design algorithm
 by Dvir Gev and Daniel Zaken
 OOP Ex1 exercise ariel university. In this task we are required to execute an algorithm, to find the best time for the total calls in offline mode.
 
@@ -10,7 +10,7 @@ allocateAnElevator - The function get call and allocate the best elevator for he
 cmd - Get the current time and move all the elevators .
 algorithm - Simulates the time of the scenario and calls the functions cmd and allocateAnElevator .
 runTester - activate the tester .
-Class
+## Class
 class Elevatorsv
 class Building 
 class CallForElevator 
