@@ -118,7 +118,7 @@ def allocateAnElevator(call):
     elev.state = call.type
     elev.sortDestList()
 
-    call.elevator = elev.index
+    call.elevator = elev.id
 
 def algorithm():
     index = 0
@@ -132,7 +132,7 @@ def algorithm():
                 break
             
 def runTester():
-    subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 1111,2222,3333 " +
+    subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 207296989,209530583 " +
                      myinput["buildingName"] + "  " + myinput["outputName"] + "  outputFormTEster.log"])
 
 

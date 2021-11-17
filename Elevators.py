@@ -3,7 +3,7 @@ from queue import PriorityQueue
 
 
 class Elevators:
-    def __init__(self, di, index):
+    def __init__(self, di):
         self.id = int(di["_id"])
         self.speed = float(di["_speed"])
         self.minFloor = int(di["_minFloor"])
@@ -12,7 +12,6 @@ class Elevators:
         self.openTime = float(di["_openTime"])
         self.startTime = float(di["_startTime"])
         self.stopTime = float(di["_stopTime"])
-        self.index = index
 
         self.currentFloor = 0
         self.startTime = 0
