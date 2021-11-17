@@ -1,4 +1,4 @@
-# **OOP--Ex1**
+# OOP--Ex1
 <br />
 ## Elevator system design algorithm
 By Dvir Gev and Daniel Zaken
