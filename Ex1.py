@@ -7,6 +7,8 @@ import random
 import subprocess
 counter = 0
 # for run: python Ex1.py input\Ex1_Buildings\B2.json input\Ex1_Calls\Calls_a.csv myOutput.csv
+
+#read the input names from the terminal else put defalt names
 def inputs():
     if len(sys.argv) == 1:
         di = {
@@ -22,7 +24,7 @@ def inputs():
         }
     return di
 
-
+#read the csv input to list "calls"
 def readCalls(file_name):
     calls = []
     with open(file_name) as fp:
@@ -34,7 +36,7 @@ def readCalls(file_name):
             calls.append(CallForElevator(k))
     return calls
 
-
+#write the list "calls" to a csv file
 def writeCalls():
     dataCalls = []
     for k in calls:
@@ -43,7 +45,7 @@ def writeCalls():
         csvwriter = csv.writer(fu)
         csvwriter.writerows(dataCalls)
 
-
+#retrun the most preferable elevators
 def candidateElevators(call):
     global counter
     temp = []
@@ -80,13 +82,30 @@ def candidateElevators(call):
         counter += 1
     return temp
 
-
+#calculate the time that add to elevator from the call
 def calculateTime(elev: Elevators, src: int) -> float:
     distance = abs(elev.currentFloor - src)
     time = (distance / elev.speed) + elev.openTime + elev.closeTime + elev.startTime + elev.stopTime
     return time
 
+#put elevator to all the calls
+def allocateAnElevator(call):
+    temp = []
+    temp = candidateElevators(call)
+    relevant = calculateTime(temp[0], call.src)
+    elev = temp[0]
+    for e in temp:
+        min = calculateTime(e, call.src)
+        if relevant > min:
+            relevant = min
+            elev = e
+    elev.destList.put(call.src)
+    elev.destList.put(call.dest)
+    elev.state = call.type
 
+    call.elevator = elev.id
+
+#move the elevators such the tester evry secound
 def cmd(time: int):
     for e in building.elevators:
         if e.state == 1 and e.startTime <= time:
@@ -102,24 +121,7 @@ def cmd(time: int):
         if e.destList.empty():
             e.dest = 0
 
-
-def allocateAnElevator(call):
-    temp = []
-    temp = candidateElevators(call)
-    relevant = calculateTime(temp[0], call.src)
-    elev = temp[0]
-    for e in temp:
-        min = calculateTime(e, call.src)
-        if relevant > min:
-            relevant = min
-            elev = e
-    elev.destList.put(call.src)
-    elev.destList.put(call.dest)
-    elev.state = call.type
-    elev.sortDestList()
-
-    call.elevator = elev.id
-
+#the "brain" of the code
 def algorithm():
     index = 0
     endTime = int(calls[-1].time) + 2
@@ -130,12 +132,12 @@ def algorithm():
             index += 1
             if index == len(calls):
                 break
-            
+#run the tester with the new output  
 def runTester():
     subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 207296989,209530583 " +
                      myinput["buildingName"] + "  " + myinput["outputName"] + "  outputFormTEster.log"])
 
-
+#main
 if __name__ == "__main__":
     myinput = inputs()
     building = Building(myinput["buildingName"])

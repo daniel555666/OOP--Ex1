@@ -7,6 +7,3 @@ class CallForElevator:
         self.state = int(data[4])
         self.elevator = int(data[5])
         self.type = 1 if self.dest > self.src else -1
-
-    def isDone(self) -> bool:
-        return (self.elevator != -1)
