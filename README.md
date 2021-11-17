@@ -1,5 +1,5 @@
 # OOP--Ex1
-#Elevator system design algorithm
+# Elevator system design algorithm
 by Dvir Gev and Daniel Zaken
 OOP Ex1 exercise ariel university. In this task we are required to execute an algorithm, to find the best time for the total calls in offline mode.
 
@@ -17,5 +17,7 @@ class CallForElevator
 
 
 link to instructions of Ex1 https://docs.google.com/document/d/1D4aW2vRaKjwtSBY1gDyCC6SNRE5TRGwMerGIXUMkI_Y/edit
+
+
+
 ![image](https://user-images.githubusercontent.com/92304153/142245777-f47dff89-a507-4ba9-b2a1-7244c50688b5.png)
-![image](https://user-images.githubusercontent.com/92304153/142251953-3ba706ba-d312-41e5-aa19-cd7435143662.png)
