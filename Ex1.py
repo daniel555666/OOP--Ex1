@@ -10,17 +10,17 @@ counter = 0
 
 #read the input names from the terminal else put defalt names
 def inputs():
-    if len(sys.argv) == 1:
-        di = {
-            "buildingName": "input\Ex1_Buildings\B2.json",
-            "callsName": "input\Ex1_Calls\Calls_a.csv",
-            "outputName": "out.csv"
-        }
-    else:
+    if len(sys.argv) == 4:
         di = {
             "buildingName": sys.argv[1],
             "callsName": sys.argv[2],
             "outputName": sys.argv[3]
+        }
+    else:
+        di = {
+            "buildingName": "input\Ex1_Buildings\B2.json",
+            "callsName": "input\Ex1_Calls\Calls_a.csv",
+            "outputName": "out.csv"
         }
     return di
 
