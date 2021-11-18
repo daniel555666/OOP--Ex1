@@ -15,22 +15,18 @@ class Elevators:
         self.stopTime = float(di["_stopTime"])
         
         self.currentFloor = 0
-        self.startTime = 0 #the time that the elevator can start move
+        self.timeStart= 0 #the time that the elevator can start move
         self.state = 0  # 1 Up, -1 DOWN, 0 LEVEL
 
         self.destList = PriorityQueue() #all the floor that the elevator go
-        self.destList.put(0)  # [floor]
-        self.dest = self.destList.get()#the current dest
+        self.dest = 0#the current dest
 
-        self.stoptime = self.startTime + self.stopTime + self.openTime + self.closeTime #the time that take the elevator to stop and start
+        self.timeStop = self.openTime + self.closeTime + self.startTime + self.stopTime #the time that take the elevator to stop and start
 
     #do "smart" pop from deatList
     def updetDest(self):
         if not self.destList.empty():
-            if self.state == -1:
-                self.dest = -1 * self.destList.get()
-            else:
-                self.dest = self.destList.get()
+            self.dest = self.state * self.destList.get()
         else:
             self.state = 0
         return self.dest
