@@ -26,4 +26,4 @@ link to instructions of Ex1 https://docs.google.com/document/d/1D4aW2vRaKjwtSBY1
 for run the code: python Ex1.py input\Ex1_Buildings\B2.json input\Ex1_Calls\Calls_a.csv myOutput.csv 
 
 ![image](https://user-images.githubusercontent.com/92304153/142245777-f47dff89-a507-4ba9-b2a1-7244c50688b5.png)
-![image](https://user-images.githubusercontent.com/92304153/142393305-edc221eb-0a51-4acd-b56e-3b674e5aa093.png)
+![image](https://user-images.githubusercontent.com/92304153/142478750-73ce66e8-4b9b-489a-a71e-6e089510cc05.png)
