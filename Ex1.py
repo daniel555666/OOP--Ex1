@@ -149,4 +149,4 @@ if __name__ == "__main__":
     calls = readCalls(myinput["callsName"])
     algorithm()
     writeCalls()
-    runTester()
+    #runTester()
