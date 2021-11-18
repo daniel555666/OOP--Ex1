@@ -10,7 +10,7 @@ from Elevators import Elevators
 counter = 0
 # for run: python Ex1.py input\Ex1_Buildings\B2.json input\Ex1_Calls\Calls_a.csv myOutput.csv
 
-# read the input names from the terminal else put defalt names
+# read the input names from the terminal else put default names
 def inputs():
     if len(sys.argv) == 4:
         di = {
