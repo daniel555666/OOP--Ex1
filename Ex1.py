@@ -103,39 +103,47 @@ def allocateAnElevator(call):
             elev = e
     elev.destList.put(call.src)
     elev.destList.put(call.dest)
-    elev.state = call.type
+    if elev.destList.empty():
+        elev.state = call.type
 
     call.elevator = elev.id
 
 # move the elevators such the tester evry secound
 def cmd(time: int):
     for e in building.elevators:
+        if e.destList.empty():
+            e.state = 0
+        else:
+            e.state =  1 if e.dest >= e.currentFloor else -1
         if e.state == 1 and e.timeStart <= time:
             e.currentFloor += e.speed
             if e.currentFloor >= e.dest:
-                e.currntFloor = e.dest
-                e.updetDest()
+                e.currentFloor = e.updetDest()
                 e.timeStart = time + e.timeStop
         elif e.state == -1 and e.timeStart <= time:
             e.currentFloor -= e.speed
             if e.currentFloor <= e.dest:
-                e.currntFloor = e.dest
-                e.updetDest()
+                e.currentFloor = e.updetDest()
                 e.timeStart = time + e.timeStop
-        if e.destList.empty():
-            e.dest = 0
 
+def writeElevatorPos(elevsPos):
+    with open("elevatorPos.csv", 'w', newline="") as fu:
+        csvwriter = csv.writer(fu)
+        csvwriter.writerows(elevsPos)
 # the "brain" of the code
 def algorithm():
+    elevsPos = [[building.minFloor,building.maxFloor]]
     index = 0
     endTime = int(calls[-1].time) + 1
     for time in range(endTime):
         cmd(time)
+        elevsPos.append([int(e.currentFloor) for e in building.elevators])
         while int(calls[index].time) <= time:
             allocateAnElevator(calls[index])
             index += 1
             if index == len(calls):
                 break
+    writeElevatorPos(elevsPos)
 # run the tester with the new output
 def runTester():
     subprocess.Popen(["powershell.exe", "java -jar lib\Ex1_checker_V1.2_obf.jar 207296989,209530583 " +
@@ -149,4 +157,4 @@ if __name__ == "__main__":
     calls = readCalls(myinput["callsName"])
     algorithm()
     writeCalls()
-    #runTester()
+    runTester()
